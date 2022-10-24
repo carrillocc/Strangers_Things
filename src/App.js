@@ -3,6 +3,8 @@ import { Home, Posts } from "./components"
 import { Route, Switch, Link } from "react-router-dom";
 import { fetchPosts } from "./api/api";
 
+
+
 const App = () => {
     const [posts, setPosts] = useState([]);
 
