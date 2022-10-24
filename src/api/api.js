@@ -35,4 +35,21 @@ export const registerUser = async (username, password) => {
 }
 };
 
+export const fetchGuest = async(token) => {
+  try {
+      const response = await fetch(`${BASEURL}/users/me`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
+      console.log('User Resp Body -->', response)
+      const {data} = await response.json();
+      console.log('User Data -->', data);
+      return data;
+  }catch {
+      console.log(error)
+  }
+}
+
 // export default fetchPosts
