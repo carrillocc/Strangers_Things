@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { Home, Posts } from "./components"
 import { Route, Switch, Link } from "react-router-dom";
 import { fetchPosts } from "./api/api";
-
+import "./App.css"
 
 
 const App = () => {
@@ -21,16 +21,16 @@ const App = () => {
     }, []);
 
     return (
-        <div>
-            <nav>
-                <Link to="/">Home</Link>
-                <Link to="/Posts">Posts</Link>
+        <div className="container">
+            <nav className="ui secondary menu">
+                <Link className="item" to="/">Home</Link>
+                <Link className="item" to="/Posts">Posts</Link>
             </nav>
             <Switch>
                 <Route exact path="/">
                     <Home />
                 </Route>
-                <Route path="/Posts">
+                <Route className="item" path="/Posts">
                     <Posts posts={posts} />
                 </Route>
             </Switch>
