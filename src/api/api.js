@@ -65,16 +65,18 @@ const makeHeaders = (token) => {
 };
 
 const callAPI = async (endpointPath, defaultOptions={}) => {
+  const {token, method, body} = defaultOptions;
+
   const options = {
-    headers: makeHeaders(defaultOptions.token),
+    headers: makeHeaders(token),
   };
 
-if (defaultOptions.method) {
-  options.method = defaultOptions.method;
+if (method) {
+  options.method = method;
 }
 
-if (defaultOptions.body) {
-  options.body = JSON.stringify(defaultOptions.body);
+if (body) {
+  options.body = JSON.stringify(body);
 }
 
   const response = await fetch(`${BASEURL}${endpointPath}`, options);
@@ -87,60 +89,125 @@ if (defaultOptions.body) {
 //fetch functions
 export const fetchPosts = async () => {
   try {
-      const {success, error, data} = await callAPI('/posts');
+    const {success, error, data} = await callAPI('/posts');
 
-      if (success) {
-        return {
-          error: null, 
-          posts: data.posts
-        };
-      } else {
-        return {
-          error: error.message,
-          posts: []
-        };
-      }
-  } catch(error) {
-      console.error("There was an error fetching posts", error)
-
+    if (success) {
       return {
-        error: "Failed to load Posts",
+        error: null,
+        posts: data.posts
+      };
+    } else {
+      return {
+        error: error.message,
         posts: []
       };
+    }
+  } catch (error) {
+    console.error("There was an error registering the user,", error);
+
+    return {
+      error: 'Failed to load Posts',
+      posts: []
+    };
   }
 };
 
 export const registerUser = async (username, password) => {
   try {
-  const response = await fetch(`${BASEURL}/users/register`, { method: "POST",
-  headers: makeHeaders(),
-  body: JSON.stringify({
-    user: {
-      username,
-      password,
-    },
-  }),
-  });
-  console.log("response...", response)
-  const data = await response.json();
-  console.log("data....", data)
-  return data;
-} catch(error) {
+    const {success, error, data} = callAPI('/users/register', {
+      method: 'POST',
+      body: {
+        user: {
+              username,
+              password,
+        },
+      }
+    });
+
+    if (success) {
+      return {
+        error: null,
+        token: data.token,
+        message: data.message
+      };
+    } else {
+      return {
+        error: error.message,
+        token: null,
+        message: null
+      };
+    } 
+  } catch(error) {
   console.error("There was an error registering the user,", error);
-}
+
+    return {
+      error: 'Registration Failed.',
+      token: null,
+      message: null
+    };
+  }
 };
 
 export const fetchGuest = async(token) => {
-try {
-    const response = await fetch(`${BASEURL}/users/me`, {
-      headers: makeHeaders(token),
+  try {
+    const {success, error, data} = await callAPI('/users/me', {
+      token: token
     });
-    console.log('User Resp Body -->', response)
-    const {data} = await response.json();
-    console.log('User Data -->', data);
-    return data;
-}catch {
-    console.log(error)
-}
+
+    if (success) {
+      return {
+      error: null,
+      username: data.username
+      }
+    } else {
+      return {
+        error: error.message,
+        username: null
+      }
+    }
+  } catch (error) {
+    console.error('failed to fetch guest', error)
+
+    return {
+      error: 'Failed to load username information',
+      username: null
+    };
+  }
 };
 
+export const createPost = async (token, title, description, price, willDeliver) => {
+  try {
+    const {success, error, data} = await callAPI('/posts', {
+      token: token,
+      method: "POST",
+      headers: makeHeaders(token),
+      body: JSON.stringify({
+        post: {
+        title: title,
+        description: description,
+        price: price,
+        willDeliver: willDeliver
+        }
+      })
+    });
+
+    if (success) {
+      return {
+        error: null,
+        post: data.post
+      };
+    } else {
+      return {
+        error: error.message,
+        post: null
+      };
+    }
+  } catch (error) {
+    console.error('Post /posts failed:', error);
+
+    return {
+      error: 'Failed to create Post',
+      post: null
+    }
+  }
+}

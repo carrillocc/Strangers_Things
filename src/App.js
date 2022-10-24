@@ -7,7 +7,7 @@ import "./App.css"
 
 const App = () => {
     const [posts, setPosts] = useState([]);
-    const [token, setToken] = useState(window.localStorage.getItem("token")||"");
+    const [token, setToken] = useState(window.localStorage.getItem("token") || null);
     const [guest, setGuest] = useState(null);
 
     const history = useHistory()
@@ -36,11 +36,15 @@ const App = () => {
     }, [token]);
 
     useEffect(() => {
-        window.localStorage.setItem("token", token)
-    }, [token])
+        if (token) {
+            window.localStorage.setItem("token", token);
+        } else {
+            window.localStorage.removeItem("token");
+        }
+    }, [token]);
 
     const logOut = () => {
-        setToken("");
+        setToken(null);
         setGuest(null);
         history.push("/");
     }
