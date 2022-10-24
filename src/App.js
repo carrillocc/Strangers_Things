@@ -14,12 +14,12 @@ const App = () => {
 
     useEffect(() => {
         const getPosts = async () => {
-            try {
-                const result = await fetchPosts()
-                setPosts(result)
-            } catch(error) {
-                console.error(error)
+            const {error, posts} = await fetchPosts();
+           
+            if (error) {
+                console.error(error);
             }
+            setPosts(posts);
         };
         getPosts();
     }, []);
