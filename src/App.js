@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
-import { Home, Posts, AccountForm } from "./components"
+import { Home, Posts, AccountForm, PostsCreateForm } from "./components"
 import { Route, Switch, Link, useHistory } from "react-router-dom";
 import { fetchPosts, fetchGuest } from "./api/api";
 import "./App.css"
+
 
 
 const App = () => {
@@ -68,6 +69,9 @@ const App = () => {
             <Switch>
                 <Route exact path="/">
                     <Home guest={guest} />
+                </Route>
+                <Route className="item" path="/Posts/create">
+                    <PostsCreateForm token={token} setPosts={setPosts} />
                 </Route>
                 <Route className="item" path="/Posts">
                     <Posts posts={posts} />
