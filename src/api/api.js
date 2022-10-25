@@ -87,9 +87,11 @@ if (body) {
 
 
 //fetch functions
-export const fetchPosts = async () => {
+export const fetchPosts = async (token) => {
   try {
-    const {success, error, data} = await callAPI('/posts');
+    const {success, error, data} = await callAPI('/posts', {
+      token: token
+    });
 
     if (success) {
       return {
@@ -114,7 +116,7 @@ export const fetchPosts = async () => {
 
 export const registerUser = async (username, password) => {
   try {
-    const {success, error, data} = callAPI('/users/register', {
+    const {success, error, data} = await callAPI('/users/register', {
       method: 'POST',
       body: {
         user: {
@@ -148,7 +150,7 @@ export const registerUser = async (username, password) => {
   }
 };
 
-export const fetchGuest = async(token) => {
+export const fetchGuest = async (token) => {
   try {
     const {success, error, data} = await callAPI('/users/me', {
       token: token

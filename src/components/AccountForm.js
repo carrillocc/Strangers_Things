@@ -27,7 +27,7 @@ const AccountForm = ({setToken}) => {
         
     };
 
-    const title = action === "login" ? "Log In" : "Sign Up"
+    const title = action === "login" ? "Log In" : "Sign Up";
 
 
     return (
