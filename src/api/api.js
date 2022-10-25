@@ -177,20 +177,36 @@ export const fetchGuest = async (token) => {
   }
 };
 
-export const createPost = async (token, title, description, price, willDeliver) => {
+export const createPost = async (token, title, description, price, location, willDeliver) => {
   try {
+    const post = {
+      description: description
+    };
+
+    if (location) {
+      post.location = location;
+    }
+
+    if (price) {
+      post.price = price;
+    }
+
+    if (willDeliver) {
+      post.willDeliver = willDeliver;
+    }
+
     const {success, error, data} = await callAPI('/posts', {
       token: token,
       method: "POST",
       headers: makeHeaders(token),
-      body: JSON.stringify({
+      body: {
         post: {
         title: title,
         description: description,
         price: price,
         willDeliver: willDeliver
         }
-      })
+      }
     });
 
     if (success) {
