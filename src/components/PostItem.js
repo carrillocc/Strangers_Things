@@ -9,7 +9,7 @@ const PostItem = ({posts}) => {
             "_id": "5e8d1fd747b6ce0017600594",
             "content": "I really love this item.  Can I have it?",
             "post": "5e8d1f2539e7a70017a7c965",
-            "fromUser": "5e8d1f2539e7a70017a7c961",
+            "fromUser": "Martha12345",
             "createdAt": "2020-04-08T00:50:31.402Z",
             "updatedAt": "2020-04-08T00:50:31.402Z",
             "__v": 0
@@ -50,7 +50,7 @@ const PostItem = ({posts}) => {
                     {posts.messages.map((message) => {
                         return (
                             <div role="listitem" className="item">
-                                <b>{message.fromUser.username}</b>
+                                <b>{message.fromUser}</b>
                                 <p className="content">{message.content}</p>
                             </div>
                         )
