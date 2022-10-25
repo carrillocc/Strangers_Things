@@ -15,7 +15,7 @@ const App = () => {
 
     useEffect(() => {
         const getPosts = async () => {
-            const {error, posts} = await fetchPosts();
+            const {error, posts} = await fetchPosts(token);
            
             if (error) {
                 console.error(error);

@@ -2,25 +2,36 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const PostItem = ({posts}) => {
+    console.log(posts, "IN ITEMS");
     return (
         <div className="ui card">
             <div className="content">
-                <div className="centered aligned header">
-                    {posts.author.username}
+                <div className="left floated aligned header">
+                    User: {posts.author.username}
+                </div>
+                <div className="right floated aligned header">
+                    {posts.isAuthor ? <span>My Post</span> : null}
                 </div>
                 <div className="centered aligned description">
-                    <b>
-                        {posts.title}
-                    </b>
                     <p>
-                        {posts.description}
+                        <b>
+                            Title: {posts.title}
+                        </b>
                     </p>
-                    <b>
-                        {posts.price}
-                    </b>
+                    <p>
+                        <b>
+                        Price: {posts.price}
+                        </b>
+                    </p>
+                    <p>
+                        Description: {posts.description}
+                    </p>
+                    <p>
+                        Location: {posts.location}
+                    </p>
                     <div className="extra content">
                         <div className="center aligned header">
-                            <Link to="">View Location</Link>
+                            <Link to="">View Item</Link>
                         </div>
                     </div>
                 </div>
