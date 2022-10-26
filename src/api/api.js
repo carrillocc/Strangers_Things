@@ -267,4 +267,31 @@ export const createPost = async (token, title, description, price, location, wil
       post: null
     }
   }
+};
+
+export const deletePost = async (token, postId) => {
+  try {
+    const {success, error, data} = await callAPI(`/posts/${postId}`, {
+      method: "DELETE",
+      token: token
+    });
+
+      if (success) {
+        return {
+          error: null,
+          data: null
+        }; 
+        } else {
+          return {
+            error: error.message,
+            data: null
+          };
+        }
+  }catch(error) {
+      console.error("DELETE /posts/postId failed:", error);
+      return {
+        error: "Failed to delete post",
+        data: null
+      };
+  }
 }

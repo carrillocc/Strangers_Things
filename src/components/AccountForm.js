@@ -19,7 +19,10 @@ const AccountForm = ({setToken}) => {
         const {error, token, message} = await 
         authFn(username, password);
 
-        console.error(error);
+        if (error) {
+            console.error(error);
+        }
+        
 
         setToken(token);
         

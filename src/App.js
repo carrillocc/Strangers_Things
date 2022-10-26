@@ -74,7 +74,7 @@ const App = () => {
                     <PostsCreateForm token={token} setPosts={setPosts} />
                 </Route>
                 <Route className="item" path="/Posts">
-                    <Posts posts={posts} />
+                    <Posts posts={posts} token={token} setPosts={setPosts} />
                 </Route>
                 <Route className="item" path="/account/:action">
                     <AccountForm setToken={setToken} />
