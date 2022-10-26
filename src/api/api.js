@@ -14,7 +14,8 @@ const BASEURL = "https://strangers-things.herokuapp.com/api/2207-FTB-ET-WEB-PT"
 
 // export const registerUser = async (username, password) => {
 //     try {
-//     const response = await fetch(`${BASEURL}/users/register`, { method: "POST",
+//     const response = await fetch(`${BASEURL}/users/register`, { 
+    // method: "POST",
 //     headers: {
 //       'Content-Type': 'application/json'
 //     },
@@ -117,6 +118,42 @@ export const fetchPosts = async (token) => {
 export const registerUser = async (username, password) => {
   try {
     const {success, error, data} = await callAPI('/users/register', {
+      method: 'POST',
+      body: {
+        user: {
+              username,
+              password,
+        },
+      }
+    });
+
+    if (success) {
+      return {
+        error: null,
+        token: data.token,
+        message: data.message
+      };
+    } else {
+      return {
+        error: error.message,
+        token: null,
+        message: null
+      };
+    } 
+  } catch(error) {
+  console.error("There was an error registering the user,", error);
+
+    return {
+      error: 'Registration Failed.',
+      token: null,
+      message: null
+    };
+  }
+};
+
+export const loginUser = async (username, password) => {
+  try {
+    const {success, error, data} = await callAPI('/users/login', {
       method: 'POST',
       body: {
         user: {

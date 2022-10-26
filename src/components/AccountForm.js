@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {registerUser} from "../api/api";
+import {registerUser, loginUser} from "../api/api";
 import { useParams, useHistory } from "react-router-dom";
 
 const AccountForm = ({setToken}) => {
@@ -13,9 +13,11 @@ const AccountForm = ({setToken}) => {
 
     const onSubmitHandler = async(event) => {
         event.preventDefault();
+
+        const authFn = action === "register" ? registerUser : loginUser;
         
         const {error, token, message} = await 
-        registerUser(username, password);
+        authFn(username, password);
 
         console.error(error);
 
