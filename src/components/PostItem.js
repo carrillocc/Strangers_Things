@@ -5,17 +5,17 @@ import { Link } from "react-router-dom";
 const PostItem = ({posts, headerElement, children }) => {
     console.log(posts, "IN ITEMS");
 
-    // posts.messages = [
-    //     {
-    //         "_id": "5e8d1fd747b6ce0017600594",
-    //         "content": "I really love this item.  Can I have it?",
-    //         "post": "5e8d1f2539e7a70017a7c965",
-    //         "fromUser": "Martha12345",
-    //         "createdAt": "2020-04-08T00:50:31.402Z",
-    //         "updatedAt": "2020-04-08T00:50:31.402Z",
-    //         "__v": 0
-    //     }
-    // ];
+    posts.messages = [
+        {
+            "_id": "5e8d1fd747b6ce0017600594",
+            "content": "I really love this item.  Can I have it?",
+            "post": "5e8d1f2539e7a70017a7c965",
+            "fromUser": "Martha12345",
+            "createdAt": "2020-04-08T00:50:31.402Z",
+            "updatedAt": "2020-04-08T00:50:31.402Z",
+            "__v": 0
+        }
+    ];
 
     
 
@@ -45,7 +45,7 @@ const PostItem = ({posts, headerElement, children }) => {
                     </p>
                     <div className="extra content">
                         <div className="center aligned header">
-                            <Link to={`/Posts/${posts._id}`}>View Post </Link>
+                            <Link to="">View Item</Link>
                         </div>
                     </div>
                 </div>
