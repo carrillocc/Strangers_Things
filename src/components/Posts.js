@@ -18,16 +18,15 @@ const Posts = ({ posts, setPosts, token }) => {
          <div className="posts-container">
             {posts.map((item) => {
                 return (  
-                    <PostItem key={item._id} posts={item} >
-                    {
+                    <PostItem key={item._id} posts={item} headerElement={
                         item.isAuthor ? (
                         <div className="right floated aligned header">My Post</div> ) : null
-                    }
-                    {
-                        item.isAuthor ? (
+                        }>
+                    
+                        {item.isAuthor ? (
                         <button 
-                            onClick={(() => handleDeleteClick(item._id))} className="negative ui button left floated">Delete</button> ) : null
-                    }
+                            onClick={(() => handleDeleteClick(item._id))} className="negative ui button left floated">Delete</button> ) : null}
+                    
                     </PostItem>
                 );
             })}
