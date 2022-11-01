@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { deletePost } from "../api/api";
 
-const PostItem = ({posts, setPosts, token}) => {
+
+const PostItem = ({posts, children }) => {
     console.log(posts, "IN ITEMS");
 
     // posts.messages = [
@@ -17,18 +17,14 @@ const PostItem = ({posts, setPosts, token}) => {
     //     }
     // ];
 
-    const handleDeleteClick = async (postId) => {
-        await deletePost(token, postId);
-        setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId))
-    }
+    
 
     return (
         <div className="ui card">
             <div className="content">
                 <div className="left floated aligned header">
                     User: {posts.author.username}
-                </div>
-                    {posts.isAuthor ? <div className="right floated aligned header">My Post</div> : null}
+                </div>  
                 <div className="centered aligned description">
                     <p>
                         <b>
@@ -53,12 +49,7 @@ const PostItem = ({posts, setPosts, token}) => {
                     </div>
                 </div>
                 <div role="list" className="ui divided relaxed list" style={{color: '#444'}}>
-                    
-                    {
-                        posts.isAuthor && token ? <button onClick={(() => handleDeleteClick(posts._id))} className="negative ui button left floated">Delete</button> : null
-                    }
-                    
-
+                    {children}
                     {/* {posts.messages.map((message) => {
                         return (
                             <div role="listitem" className="item">
