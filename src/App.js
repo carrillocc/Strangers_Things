@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Home, Posts, AccountForm, PostsCreateForm } from "./components"
+import { Home, Posts, PostDetail, AccountForm, PostsCreateForm } from "./components"
 import { Route, Switch, Link, useHistory } from "react-router-dom";
 import { fetchPosts, fetchGuest } from "./api/api";
 import "./App.css"
@@ -72,6 +72,9 @@ const App = () => {
                 </Route>
                 <Route className="item" path="/Posts/create">
                     <PostsCreateForm token={token} setPosts={setPosts} />
+                </Route>
+                <Route className="item" path="/Posts/:postId">
+                    <PostDetail />
                 </Route>
                 <Route className="item" path="/Posts">
                     <Posts posts={posts} token={token} setPosts={setPosts} />
