@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import {useParams} from 'react-router-dom';
 import PostItem from './PostItem'
 
 const PostDetail = (props) => {
     const { posts } = props;
     const { postId } = useParams();
+    const [message, setMessage] = useState('');
 
+        console.log(message)
     
     const singlePost = posts.find((singlePost) => {
         const foundPost = singlePost._id == postId
@@ -20,7 +22,11 @@ const PostDetail = (props) => {
         return (<>
             <PostItem posts={singlePost} />
             <form>
-                <input type="text" placeholder="New Comment" />
+                <input type="text" placeholder="New Comment"
+                    value={message}
+                    onChange={(event) => {
+                        setMessage(event.target.value);
+                    }} />
                 <button type="submit">Comment</button>
             </form>
         </>);
