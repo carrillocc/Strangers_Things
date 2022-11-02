@@ -269,6 +269,39 @@ export const createPost = async (token, title, description, price, location, wil
   }
 };
 
+export const addComment = async (token, postId, message) => {
+  try {
+    const { success, error, data } = await callAPI(`/posts/${postId}/messages`, {
+      token: token,
+      method: "POST",
+      body: {
+        messasge: {
+        content: message
+        },
+      },
+    });
+
+    if (success) {
+      return {
+        error: null,
+        message: data.message
+      };
+    } else {
+      return {
+        error: error.message,
+        message: null
+      };
+    }
+  } catch (error) {
+    console.error(`Post /posts/${postId}/messages failed:`, error);
+
+    return {
+      error: 'Failed to create message for post',
+      message: null
+    };
+  };
+}
+
 export const deletePost = async (token, postId) => {
   try {
     const {success, error, data} = await callAPI(`/posts/${postId}`, {
