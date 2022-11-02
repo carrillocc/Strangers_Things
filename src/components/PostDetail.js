@@ -3,16 +3,18 @@ import {useParams} from 'react-router-dom';
 // import PostItem from './PostItem'
 
 const PostDetail = (props) => {
-    // const { posts } = props;
+    const { posts } = props;
     const { postId } = useParams();
+
+    
+    const singlePost = posts.find((singlePost) => {
+        const foundPost = singlePost._id == postId
+        return foundPost
+    });
 
     return (
         `post details for id=${postId}`
     )
-    // const singlePost = posts.find((singlePost) => {
-    //     const foundPost = singlePost._id == postId
-    //     return foundPost
-    // });
 
     // console.log(singlePost, "this is singlePost")
 
