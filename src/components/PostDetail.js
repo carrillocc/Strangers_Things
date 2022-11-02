@@ -1,6 +1,6 @@
 import React from "react";
 import {useParams} from 'react-router-dom';
-// import PostItem from './PostItem'
+import PostItem from './PostItem'
 
 const PostDetail = (props) => {
     const { posts } = props;
@@ -12,9 +12,16 @@ const PostDetail = (props) => {
         return foundPost
     });
 
-    return (
-        `post details for id=${postId}`
-    )
+    if (singlePost) {
+        return (
+            <PostItem posts={singlePost} />
+        );
+    } else {
+        return (
+            <p>Loading Post Details...</p>
+        )
+    }
+    
 
     // console.log(singlePost, "this is singlePost")
 
