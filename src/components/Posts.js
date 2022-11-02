@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import PostItem from "./PostItem";
 import {Link} from 'react-router-dom';
 import { deletePost } from "../api/api";
@@ -6,6 +6,7 @@ import './Posts.css';
 
 const Posts = ({ posts, setPosts, token }) => {
     console.log("use these posts", posts);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const handleDeleteClick = async (postId) => {
         await deletePost(token, postId);
@@ -14,6 +15,9 @@ const Posts = ({ posts, setPosts, token }) => {
     };
     
     return (<>
+        <input type="text" placeholder="Search" value={searchTerm} onChange={(event) => {
+
+        } } />
         <Link to="/Posts/create" className="ui button">Create a Post</Link>
          <div className="posts-container">
             {posts.map((item) => {
