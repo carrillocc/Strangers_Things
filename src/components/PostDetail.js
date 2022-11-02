@@ -14,6 +14,12 @@ const PostDetail = (props) => {
         return foundPost
     });
 
+    const handleOnSubmit = (event) => {
+        event.preventDefault();
+
+        //call api 
+    }
+
     if (!singlePost) {
         return (
             <p>Loading Post Details...</p>
@@ -22,7 +28,7 @@ const PostDetail = (props) => {
         
     return (<>
         <PostItem posts={singlePost} />
-        <form>
+        <form className="content-form" onSubmit={handleOnSubmit}>
             <input type="text" placeholder="New Comment"
                 value={message}
                 onChange={(event) => setMessage(event.target.value)} />
