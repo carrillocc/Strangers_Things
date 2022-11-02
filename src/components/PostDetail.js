@@ -18,18 +18,17 @@ const PostDetail = (props) => {
         return (
             <p>Loading Post Details...</p>
         )
-    } else {
-        return (<>
-            <PostItem posts={singlePost} />
-            <form>
-                <input type="text" placeholder="New Comment"
-                    value={message}
-                    onChange={(event) => {
-                        setMessage(event.target.value);
-                    }} />
-                <button type="submit">Comment</button>
-            </form>
-        </>);
+    }
+        
+    return (<>
+        <PostItem posts={singlePost} />
+        <form>
+            <input type="text" placeholder="New Comment"
+                value={message}
+                onChange={(event) => setMessage(event.target.value)} />
+            <button type="submit">Comment</button>
+        </form>
+    </>);
     };
 
     // if (singlePost) {
@@ -41,7 +40,5 @@ const PostDetail = (props) => {
     //         <p>Loading Post Details...</p>
     //     )
     // }
-    
-};
 
 export default PostDetail;
