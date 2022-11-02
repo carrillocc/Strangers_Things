@@ -15,9 +15,12 @@ const Posts = ({ posts, setPosts, token }) => {
     };
     
     return (<>
-        <input type="text" placeholder="Search" value={searchTerm} onChange={(event) => {
+        <div class="ui icon input">
+            <input type="text" placeholder="Search..." value={searchTerm} onChange={(event) => {
+            setSearchTerm(event.target.value)}} />
+            <i class="search icon"></i>
+        </div>
 
-        } } />
         <Link to="/Posts/create" className="ui button">Create a Post</Link>
          <div className="posts-container">
             {posts.map((item) => {
