@@ -275,7 +275,7 @@ export const addComment = async (token, postId, message) => {
       token: token,
       method: "POST",
       body: {
-        messasge: {
+        message: {
         content: message
         },
       },
@@ -283,11 +283,13 @@ export const addComment = async (token, postId, message) => {
 
     if (success) {
       return {
+        success: success,
         error: null,
         message: data.message
       };
     } else {
       return {
+        success: success,
         error: error.message,
         message: null
       };
@@ -296,6 +298,7 @@ export const addComment = async (token, postId, message) => {
     console.error(`Post /posts/${postId}/messages failed:`, error);
 
     return {
+      success: false,
       error: 'Failed to create message for post',
       message: null
     };

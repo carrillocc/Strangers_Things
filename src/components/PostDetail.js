@@ -1,24 +1,33 @@
 import React, {useState} from "react";
-import {useParams} from 'react-router-dom';
+import {Redirect, useParams} from 'react-router-dom';
+import {addComment} from '../api/api'
 import PostItem from './PostItem'
 
 const PostDetail = (props) => {
-    const { posts } = props;
+    const { token, posts } = props;
     const { postId } = useParams();
-    const [message, setMessage] = useState('');
-
-        console.log(message)
+    const [messageText, setMessageText] = useState('');
+    const [errorMessage, setErrorMessage] = useState(null);
     
     const singlePost = posts.find((singlePost) => {
         const foundPost = singlePost._id == postId
         return foundPost
     });
 
-    const handleOnSubmit = (event) => {
+    const handleOnSubmit = async (event) => {
         event.preventDefault();
 
         //call api 
-    }
+        const {success, error, message} = await addComment(token, postId, messageText);
+
+        if (success) {
+            setMessageText('');
+            console.log('we successfully added a comment!')
+        } else {
+            setErrorMessage(error);
+            console.log('failed to add a comment')
+        }
+    };
 
     if (!singlePost) {
         return (
@@ -30,9 +39,11 @@ const PostDetail = (props) => {
         <PostItem posts={singlePost} />
         <form className="content-form" onSubmit={handleOnSubmit}>
             <input type="text" placeholder="New Comment"
-                value={message}
-                onChange={(event) => setMessage(event.target.value)} />
+                value={messageText}
+                onChange={(event) => setMessageText(event.target.value)} />
             <button type="submit">Comment</button>
+            {errorMessage ?
+            <p style={{color: 'red', backgroundColor: 'pink'}} >Operation Failed: {errorMessage}</p> : null}
         </form>
     </>);
     };
