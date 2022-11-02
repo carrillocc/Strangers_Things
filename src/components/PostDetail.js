@@ -17,10 +17,14 @@ const PostDetail = (props) => {
             <p>Loading Post Details...</p>
         )
     } else {
-        return (
+        return (<>
             <PostItem posts={singlePost} />
-        )
-    }
+            <form>
+                <input type="text" placeholder="New Comment" />
+                <button type="submit">Comment</button>
+            </form>
+        </>);
+    };
 
     // if (singlePost) {
     //     return (
