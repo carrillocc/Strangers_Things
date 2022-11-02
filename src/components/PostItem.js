@@ -51,14 +51,14 @@ const PostItem = ({posts, headerElement, children }) => {
                 </div>
                 {children}
                 <div role="list" className="ui divided relaxed list" style={{color: '#444', clear: 'both' }}>
-                {/* {posts.messages.map((message) => {
+                {posts.messages.map((message) => {
                         return (
                             <div key={message._id} role="listitem" className="item">
-                                <b>{message.fromUser}</b>
+                                <b>{message.fromUser.username}</b>
                                 <p className="content">{message.content}</p>
                             </div>
                         )
-                    })} */}
+                    })}
                 </div>
             </div>
         </div>
