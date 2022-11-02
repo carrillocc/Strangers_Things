@@ -12,26 +12,23 @@ const PostDetail = (props) => {
         return foundPost
     });
 
-    if (singlePost) {
-        return (
-            <PostItem posts={singlePost} />
-        );
-    } else {
+    if (!singlePost) {
         return (
             <p>Loading Post Details...</p>
         )
+    } else {
+        return (
+            <PostItem posts={singlePost} />
+        )
     }
-    
 
-    // console.log(singlePost, "this is singlePost")
-
-    // if (!singlePost) {
-    //     return (
-    //         <p>Loading Post Details...</p>
-    //     )
-    // } else {
+    // if (singlePost) {
     //     return (
     //         <PostItem posts={singlePost} />
+    //     );
+    // } else {
+    //     return (
+    //         <p>Loading Post Details...</p>
     //     )
     // }
     
