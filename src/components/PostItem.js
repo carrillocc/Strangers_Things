@@ -45,7 +45,7 @@ const PostItem = ({posts, headerElement, children }) => {
                     </p>
                     <div className="extra content">
                         <div className="center aligned header">
-                            <Link to="">View Item</Link>
+                            <Link to={`/Posts/${posts._id}`}>View Item</Link>
                         </div>
                     </div>
                 </div>
